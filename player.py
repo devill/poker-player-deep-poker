@@ -27,7 +27,7 @@ MODEL.compile(optimizer=opt,loss='binary_crossentropy', metrics=['accuracy'])
 MODEL.load_weights('lean_poker_hand_quality_v1.h5')
 
 class Player:
-    VERSION = "Fuck pogacsa 1.4"
+    VERSION = "Skynet"
 
     def chen_calculator(self,game_state):
         current_val = 0
