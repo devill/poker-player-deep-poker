@@ -66,7 +66,7 @@ class Player:
         to_call = game_state['current_buy_in'] - team['bet']
         to_raise = to_call + game_state['minimum_raise']
         
-        if chen_val >= 10:
+        if chen_val >= 8:
             return to_raise
         else:
             return 0
