@@ -45,19 +45,9 @@ curl -XPOST -d 'action=bet_request&game_state={
   "orbits":0,
   "dealer":0,
   "in_action": 0,
+  "minimum_raise" : 100,
   "community_cards":[
-        {
-            "rank": "6",
-            "suit": "spades"
-        },
-        {
-            "rank": "7",
-            "suit": "hearts"
-        },
-        {
-            "rank": "7",
-            "suit": "diamonds"
-        }
+       
     ],
   "current_buy_in":0,
   "pot":0
