@@ -1,5 +1,6 @@
 
 
+import numpy as np
 import random
 import sys
 import math
@@ -107,6 +108,39 @@ class Player:
                 active_players += 1
 
         return active_players
+
+    def get_rank(self, rank):
+        return ['2','3','4','5','6','7','8','9','10','J','Q','K','A'].index(rank)
+
+    def get_suit(self, suit):
+        return ['diamonds','spades','hearts','clubs'].index(suit)
+
+    def get_card_id(self, hand, i):
+        return (self.get_rank(hand[2 * i]), self.get_suit(hand[2 * i + 1]))
+
+    def get_cards(self, hand):
+        cards = np.zeros((13, 4))
+        for i in range(len(hand)):
+            cards[self.get_card_id(hand, i)] = 1
+        return cards
+
+    def get_cards_for_prediciton(self, game_state):
+        community_cards = game_state['community_cards']
+
+        active_player_idx = int(game_state['in_action'])
+        hole_cards = game_state['players'][active_player_idx]['hole_cards']
+
+        data = []
+
+        for community_card in community_cards:
+            data.append(community_card['rank'])
+            data.append(community_card['suit'])
+
+        for card in hole_cards:
+            data.append(card['rank'])
+            data.append(card['suit'])
+
+        return self.get_cards(data)
 
     def betRequest(self, game_state):
         
