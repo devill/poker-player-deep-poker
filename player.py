@@ -1,6 +1,4 @@
 
-import random
-
 class Player:
     VERSION = "Fuck pogacsa"
 
