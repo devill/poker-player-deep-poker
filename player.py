@@ -176,9 +176,11 @@ class Player:
                 prediction = MODEL.predict(cards)
                 p = prediction[0][0]
                 print('Prediction: %s' % p)
+                team =  game_state['players'][game_state['in_action']]
                 if p > 0.8:
-                    team =  game_state['players'][game_state['in_action']]
                     current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet']) + int(game_state['minimum_raise'])
+                elif p > 0.7:
+                    current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet'])
                 else:
                     current_bet_in_betReq = 0
             
