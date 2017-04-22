@@ -161,7 +161,7 @@ class Player:
             data.append(card['rank'])
             data.append(card['suit'])
 
-        print(data)
+        print("Prediction base: ", data)
 
         return self.get_cards(data).reshape(1,13,4,1)
 
