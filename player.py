@@ -14,9 +14,10 @@ class Player:
         if hole_cards_rank_0 == hole_cards_rank_1 and hole_cards_rank_0 in useful_ranks:
             current_bet = 10000
         elif hole_cards_rank_0 in ['Q','K','A'] and hole_cards_rank_1 in ['Q','K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
-            current_bet = 10000
+            current_bet = team['stack'] / 2
         else:
-            current_bet = 0
+            to_call = team['current_buy_in'] - team['bet']
+            current_bet = min(to_call, team['stack']/20)
         return  current_bet
         
 
