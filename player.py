@@ -6,7 +6,7 @@ class Player:
 
 
     def get_cards_back(self,game_state):
-        if random.randint(0,10) > 7:
+        if random.randint(0,10) > 2:
             return 150
 
         useful_ranks = ['8','9','10','J','Q','K','A']
