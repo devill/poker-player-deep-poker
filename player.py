@@ -161,6 +161,8 @@ class Player:
             data.append(card['rank'])
             data.append(card['suit'])
 
+        print(data)
+
         return self.get_cards(data).reshape(1,13,4,1)
 
     def betRequest(self, game_state):
@@ -172,7 +174,6 @@ class Player:
             else:
                 cards = self.get_cards_for_prediciton(game_state)
                 prediction = MODEL.predict(cards)
-                print(cards)
                 p = prediction[0][0]
                 print('Prediction: %s' % p)
                 if p > 0.8:
