@@ -20,7 +20,7 @@ curl -XPOST -d 'action=bet_request&game_state={
               "suit": "spades"
           },
           {
-              "rank": "3",
+              "rank": "Q",
               "suit": "spades"
           }
       ],

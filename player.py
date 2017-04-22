@@ -64,7 +64,7 @@ class Player:
         team =  game_state['players'][game_state['in_action']]
         
         to_call = game_state['current_buy_in'] - team['bet']
-        to_raise = to_call + game_state['minimum_raise']
+        to_raise = to_call + game_state['minimum_raise'] +50
         
         if chen_val >= 8:
             return to_raise
