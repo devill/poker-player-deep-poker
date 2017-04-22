@@ -1,28 +1,42 @@
 
-class Player:
-    VERSION = "Fuck pogacsa"
 
-    def chen_evaluator(self,game_state):
+import random
+import sys
+import math
+
+class Player:
+    VERSION = "Fuck pogacsa 1.4"
+
+    def chen_calculator(self,game_state):
         current_val = 0
+        team =  game_state['players'][game_state['in_action']]
         suite_value = { 'A' : 10, 'K' : 8 , 'Q' : 7 , 'J' : 6 , '10': 5 , '9' : 4.5 , '8' : 4, '7' : 3.5, '6': 3 , '5' : 2.5 , '4' :2 , '3' :1.5 , '2' : 1 }
         suite_order = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
         hole_cards_rank_0 = team['hole_cards'][0]["rank"]
         hole_cards_rank_1 = team['hole_cards'][1]["rank"]
         card_0_value = suite_value[hole_cards_rank_0]
+        #print(card_0_value)
         card_1_value = suite_value[hole_cards_rank_1]
+        #print(card_1_value)
         if card_0_value > card_1_value:
+            #print('first is bigger')
             current_val += card_0_value
         elif card_0_value < card_1_value:
+            #print('second is bigger')
             current_val += card_1_value
         else:
             current_val += card_0_value * 2
             if current_val < 5:
-                current_val = 5
+                current_val += 5
+        #print("chen value is now" + str(current_val))
         hole_cards_suit_0 = team['hole_cards'][0]["suit"]
         hole_cards_suit_1 = team['hole_cards'][1]["suit"]
         if hole_cards_suit_0 == hole_cards_suit_1:
             current_val += 2
-        card_gap = abs(suite_order.index(hole_cards_rank_0) -  suite_order.index(hole_cards_rank_0))-1
+        
+        card_gap = abs(suite_order.index(hole_cards_rank_0) -  suite_order.index(hole_cards_rank_1))-1
+        #print(suite_order.index(hole_cards_rank_0))
+        #print(card_gap)
         cards_lower_than_Q = False
         if suite_order.index(hole_cards_rank_0) < 10 and suite_order.index(hole_cards_rank_1) < 10:
             cards_lower_than_Q = True
@@ -40,10 +54,28 @@ class Player:
             current_val += -3
         elif card_gap > 4:
             current_val += -4
-       
-        current_val = ceil(current_val)
+        #print("chen value is now" + str(current_val))
+        current_val = math.ceil(current_val)
         return current_val
-    
+        
+        
+    def chen_evaluator(self,game_state):
+        chen_val = self.chen_calculator(game_state)
+        team =  game_state['players'][game_state['in_action']]
+        
+        to_call = game_state['current_buy_in'] - team['bet']
+        to_raise = to_call + game_state['minimum_raise'] + 150
+        
+        if chen_val >= 8:
+            return to_raise
+        if che_val >= 10:
+            return to_raise + 100
+        else:
+            return 0
+        
+        
+            
+            
     def get_cards_back(self,game_state):
         # if random.randint(0,10) > 2:
         #     return 150
@@ -76,15 +108,22 @@ class Player:
         return active_players
 
     def betRequest(self, game_state):
-        try:
-            current_bet_in_betReq = self.get_cards_back(game_state)
-            current_bet_in_betReq = int(current_bet_in_betReq)
+        
+            current_bet_in_betReq = 1
+            comm_cards = game_state['community_cards']
+            if not comm_cards:
+                current_bet_in_betReq =  self.chen_evaluator(game_state)
+            else:
+                current_bet_in_betReq = self.get_cards_back(game_state)
+                current_bet_in_betReq = int(current_bet_in_betReq)
+            
             if current_bet_in_betReq < 0:
-                current_bet_in_betReq = 0
+                current_bet_in_betReq = 2
             
             return current_bet_in_betReq
-        except:
-            current_bet_in_betReq = 0
+        
+            
+            current_bet_in_betReq = 3
             return current_bet_in_betReq
             
 
