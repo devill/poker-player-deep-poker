@@ -141,7 +141,7 @@ class Player:
 
     def get_cards(self, hand):
         cards = np.zeros((13, 4))
-        for i in range(len(hand) - 1):
+        for i in range(len(hand)/2):
             cards[self.get_card_id(hand, i)] = 1
         return cards
 
@@ -161,7 +161,7 @@ class Player:
             data.append(card['rank'])
             data.append(card['suit'])
 
-        return self.get_cards(data)
+        return self.get_cards(data).reshape(1,13,4,1)
 
     def betRequest(self, game_state):
         
@@ -171,10 +171,11 @@ class Player:
                 current_bet_in_betReq = self.chen_evaluator(game_state)
             else:
                 cards = self.get_cards_for_prediciton(game_state)
-                prediction = MODEL.predict([cards])
+                prediction = MODEL.predict(cards)
                 print(cards)
-                print('Prediction: %s' % prediction)
-                if prediction[0] > 0.8:
+                p = prediction[0][0]
+                print('Prediction: %s' % p)
+                if p > 0.8:
                     team =  game_state['players'][game_state['in_action']]
                     current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet']) + int(game_state['minimum_raise'])
                 else:
