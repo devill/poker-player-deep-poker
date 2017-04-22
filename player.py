@@ -6,11 +6,14 @@ class Player:
     def get_cards_back(self,game_state):
         useful_ranks = ['8','9','10','J','Q','K','A']
         team =  game_state['players'][game_state['in_action']]
-        hole_cards_0 = team['hole_cards'][0]["rank"]
-        hole_cards_1 = team['hole_cards'][1]["rank"]
-        if hole_cards_0 == hole_cards_1 and hole_cards_0 in useful_ranks:
+        hole_cards_rank_0 = team['hole_cards'][0]["rank"]
+        hole_cards_rank_1 = team['hole_cards'][1]["rank"]
+
+        hole_cards_suit_0 = team['hole_cards'][0]["suit"]
+        hole_cards_suit_1 = team['hole_cards'][1]["suit"]
+        if hole_cards_rank_0 == hole_cards_rank_1 and hole_cards_rank_0 in useful_ranks:
             current_bet = 10000
-        elif hole_cards_0 in ['Q','K','A'] and hole_cards_1 in ['Q','K','A']:
+        elif hole_cards_rank_0 in ['Q','K','A'] and hole_cards_rank_1 in ['Q','K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
             current_bet = 10000
         else:
             current_bet = 0
