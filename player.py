@@ -6,8 +6,8 @@ class Player:
 
 
     def get_cards_back(self,game_state):
-        if random.randint(0,10) > 2:
-            return 150
+        # if random.randint(0,10) > 2:
+        #     return 150
 
         useful_ranks = ['8','9','10','J','Q','K','A']
         team =  game_state['players'][game_state['in_action']]
@@ -26,11 +26,11 @@ class Player:
             useful_ranks = ['J','Q','K','A']
 
         if hole_cards_rank_0 == hole_cards_rank_1 and hole_cards_rank_0 in useful_ranks:
-            current_bet = 10000
+            current_bet = team['stack'] / 5
         elif active_players == 2 and hole_cards_rank_0 in ['K','A'] and hole_cards_rank_1 in ['K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
-            current_bet = team['stack'] / 2
+            current_bet = team['stack'] / 20
         else:
-            current_bet = 0
+            current_bet = 100
         return  current_bet
         
 
