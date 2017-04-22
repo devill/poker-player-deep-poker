@@ -13,7 +13,7 @@ curl -XPOST -d 'action=bet_request&game_state={
       "name":"Player 1",
       "stack":1000,
       "status":"active",
-      "bet":0,
+      "bet":50,
       "hole_cards":[
           {
               "rank": "A",
@@ -60,7 +60,7 @@ curl -XPOST -d 'action=bet_request&game_state={
               "suit": "spades"
           }
     ],
-  "current_buy_in":0,
+  "current_buy_in":100,
   "pot":0
 }' http://localhost:9000/
 

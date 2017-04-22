@@ -178,12 +178,15 @@ class Player:
                 print('Prediction: %s' % p)
                 team =  game_state['players'][game_state['in_action']]
                 if p > 0.8:
-                    current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet']) + int(game_state['minimum_raise'])
+                    current_bet_in_betReq = 10000
+                elif p > 0.74:
+                    current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet']) + 2*int(game_state['minimum_raise'])
                 elif p > 0.7:
                     current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet'])
                 else:
                     current_bet_in_betReq = 0
-            
+
+
             if current_bet_in_betReq < 0:
                 current_bet_in_betReq = 2
             
