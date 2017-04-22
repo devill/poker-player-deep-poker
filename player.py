@@ -175,6 +175,7 @@ class Player:
                 print(cards)
                 print('Prediction: %s' % prediction)
                 if prediction[0] > 0.8:
+                    team =  game_state['players'][game_state['in_action']]
                     current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet']) + int(game_state['minimum_raise'])
                 else:
                     current_bet_in_betReq = 0
