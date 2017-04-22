@@ -6,8 +6,8 @@ sleep 1
 
 PID=$!
 
-
-curl -d 'action=bet&game_state={
+echo ''
+curl -XPOST -d 'action=bet_request&game_state={
   "players":[
     {
       "name":"Player 1",
@@ -61,5 +61,8 @@ curl -d 'action=bet&game_state={
   "current_buy_in":0,
   "pot":0
 }' http://localhost:9000/
+
+echo ''
+echo ''
 
 kill $PID
