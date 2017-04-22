@@ -10,6 +10,8 @@ class Player:
         hole_cards_1 = team['hole_cards'][1]["rank"]
         if hole_cards_0 == hole_cards_1 and hole_cards_0 in useful_ranks:
             current_bet = 10000
+        elif hole_cards_0 in ['Q','K','A'] and hole_cards_1 in ['Q','K','A']:
+            current_bet = 10000
         else:
             current_bet = 0
         return  current_bet
