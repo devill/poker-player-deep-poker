@@ -141,7 +141,7 @@ class Player:
 
     def get_cards(self, hand):
         cards = np.zeros((13, 4))
-        for i in range(len(hand)):
+        for i in range(len(hand) - 1):
             cards[self.get_card_id(hand, i)] = 1
         return cards
 
@@ -176,6 +176,7 @@ class Player:
                 print('Prediction: %s' % prediction)
                 if prediction[0] > 0.8:
                     current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet']) + int(game_state['minimum_raise'])
+                else if prediction[0] > 0.7
                 else:
                     current_bet_in_betReq = 0
             
