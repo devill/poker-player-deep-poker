@@ -13,7 +13,7 @@ class Player:
         hole_cards_suit_1 = team['hole_cards'][1]["suit"]
         if hole_cards_rank_0 == hole_cards_rank_1 and hole_cards_rank_0 in useful_ranks:
             current_bet = 10000
-        elif hole_cards_rank_0 in ['Q','K','A'] and hole_cards_rank_1 in ['Q','K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
+        elif hole_cards_rank_0 in ['K','A'] and hole_cards_rank_1 in ['K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
             current_bet = team['stack'] / 2
         else:
             to_call = team['current_buy_in'] - team['bet']
