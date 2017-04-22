@@ -16,12 +16,12 @@ curl -XPOST -d 'action=bet_request&game_state={
       "bet":0,
       "hole_cards":[
           {
-              "rank": "A",
+              "rank": "2",
               "suit": "spades"
           },
           {
-              "rank": "9",
-              "suit": "clubs"
+              "rank": "J",
+              "suit": "spades"
           }
       ],
       "version":"Version name 1",
