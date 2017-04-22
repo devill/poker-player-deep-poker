@@ -168,18 +168,20 @@ class Player:
             current_bet_in_betReq = 1
             comm_cards = game_state['community_cards']
             if not comm_cards:
-                current_bet_in_betReq =  self.chen_evaluator(game_state)
+                current_bet_in_betReq = self.chen_evaluator(game_state)
             else:
-                current_bet_in_betReq = self.get_cards_back(game_state)
-                current_bet_in_betReq = int(current_bet_in_betReq)
+                cards = self.get_cards_for_prediciton(game_state)
+                prediction = MODEL.predict([cards])
+                print(cards)
+                print('Prediction: %s' % prediction)
+                if prediction[0] > 0.8:
+                    current_bet_in_betReq = int(game_state['current_buy_in']) - int(team['bet']) + int(game_state['minimum_raise'])
+                else:
+                    current_bet_in_betReq = 0
             
             if current_bet_in_betReq < 0:
                 current_bet_in_betReq = 2
             
-            return current_bet_in_betReq
-        
-            
-            current_bet_in_betReq = 3
             return current_bet_in_betReq
             
 
