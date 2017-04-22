@@ -29,8 +29,10 @@ class Player:
             current_bet = team['stack'] / 5
         elif active_players == 2 and hole_cards_rank_0 in ['K','A'] and hole_cards_rank_1 in ['K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
             current_bet = team['stack'] / 20
+        elif team['bet'] > 0:
+            current_bet = game_state['current_buy_in'] - team['bet']
         else:
-            current_bet = 100
+            current_bet = 0
         return  current_bet
         
 
