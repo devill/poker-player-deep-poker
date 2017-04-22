@@ -17,26 +17,24 @@ class Player:
         hole_cards_suit_0 = team['hole_cards'][0]["suit"]
         hole_cards_suit_1 = team['hole_cards'][1]["suit"]
 
-        active_players = 0
-        for player in game_state['players']:
-            if player['active'] != 'out':
-                active_players += 1
-
-        if active_players > 2:
-            useful_ranks = ['J','Q','K','A']
-
         to_call = game_state['current_buy_in'] - team['bet']
         if hole_cards_rank_0 == hole_cards_rank_1 and hole_cards_rank_0 in useful_ranks:
             current_bet = 10000
-        elif active_players == 2 and hole_cards_rank_0 in ['K','A'] and hole_cards_rank_1 in ['K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
+        elif hole_cards_rank_0 in ['J','Q','K','A'] and hole_cards_rank_1 in ['J','Q','K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
             current_bet = to_call
         elif team['bet'] > 0 and team['bet'] > to_call / 10:
             current_bet = to_call
         else:
             current_bet = 0
         return  current_bet
-        
 
+    def get_number_of_active_players(self, game_state):
+        active_players = 0
+        for player in game_state['players']:
+            if player['active'] != 'out':
+                active_players += 1
+
+        return active_players
 
     def betRequest(self, game_state):
         try:
