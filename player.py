@@ -5,7 +5,7 @@ import sys
 import math
 
 class Player:
-    VERSION = "Fuck pogacsa"
+    VERSION = "Fuck pogacsa 1.4"
 
     def chen_calculator(self,game_state):
         current_val = 0
