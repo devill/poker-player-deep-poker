@@ -5,6 +5,14 @@ import random
 import sys
 import math
 
+import keras
+from keras.models import Sequential
+from keras.layers.normalization import BatchNormalization
+from keras.layers.core import Flatten, Dense, Dropout, Activation
+from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
+from keras.optimizers import Nadam
+from keras.preprocessing import image
+
 class Player:
     VERSION = "Fuck pogacsa 1.4"
 
