@@ -3,13 +3,6 @@ import numpy as np
 from sklearn.cross_validation import train_test_split
 import random
 
-import keras
-from keras.models import Sequential
-from keras.layers.normalization import BatchNormalization
-from keras.layers.core import Flatten, Dense, Dropout, Activation
-from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
-from keras.optimizers import Nadam
-from keras.preprocessing import image
 
 def get_rank(rank):
     return ['2','3','4','5','6','7','8','9','10','J','Q','K','A'].index(rank)
