@@ -102,7 +102,7 @@ class Player:
             current_bet_in_betReq = 1
             comm_cards = game_state['community_cards']
             if not comm_cards:
-                current_bet_in_betReq =  self.chen_evaluator(game_state) + 50
+                current_bet_in_betReq =  self.chen_evaluator(game_state)
             else:
                 current_bet_in_betReq = self.get_cards_back(game_state)
                 current_bet_in_betReq = int(current_bet_in_betReq)
