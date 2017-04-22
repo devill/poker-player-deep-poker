@@ -68,6 +68,8 @@ class Player:
         
         if chen_val >= 8:
             return to_raise
+        if che_val >= 10:
+            return 10000    
         else:
             return 0
         
