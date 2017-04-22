@@ -4,6 +4,29 @@ import random
 import sys
 import math
 
+import keras
+from keras.models import Sequential
+from keras.layers.normalization import BatchNormalization
+from keras.layers.core import Flatten, Dense, Dropout, Activation
+from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
+from keras.optimizers import Nadam
+from keras.preprocessing import image
+
+MODEL = Sequential([
+    ZeroPadding2D(padding=(2, 0), input_shape=(13, 4, 1)),
+    Convolution2D(10,5,4, border_mode='valid', activation='relu'),
+    Flatten(),
+    Dense(20, activation='relu'),
+    Dense(1),
+    Activation('sigmoid')
+])
+
+opt = Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, schedule_decay=0.006)
+MODEL.compile(optimizer=opt, loss='binary_crossentropy', metrics=['accuracy'])
+
+MODEL.load_weights('lean_poker_hand_quality_v1.h5')
+
+
 class Player:
     VERSION = "Fuck pogacsa 1.4"
 
@@ -106,6 +129,23 @@ class Player:
                 active_players += 1
 
         return active_players
+
+    def get_cards_for_prediction(game_state):
+        current_player_id = int(game_state['in_action'])
+        community_cards = game_state['community_cards']
+        hole_cards = game_state['players'][current_player_id]['hole_cards']
+
+        data = []
+
+        for community_card in community_cards:
+            data.append(community_card['rank'])
+            data.append(community_card['suit'])
+
+        for card in hole_cards:
+            data.append(card['rank'])
+            data.append(card['suit'])
+
+        return data
 
     def betRequest(self, game_state):
         
