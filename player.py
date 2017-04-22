@@ -15,20 +15,28 @@ class Player:
         hole_cards_rank_0 = team['hole_cards'][0]["rank"]
         hole_cards_rank_1 = team['hole_cards'][1]["rank"]
         card_0_value = suite_value[hole_cards_rank_0]
+        #print(card_0_value)
         card_1_value = suite_value[hole_cards_rank_1]
+        #print(card_1_value)
         if card_0_value > card_1_value:
+            #print('first is bigger')
             current_val += card_0_value
         elif card_0_value < card_1_value:
+            #print('second is bigger')
             current_val += card_1_value
         else:
             current_val += card_0_value * 2
             if current_val < 5:
-                current_val = 5
+                current_val += 5
+        #print("chen value is now" + str(current_val))
         hole_cards_suit_0 = team['hole_cards'][0]["suit"]
         hole_cards_suit_1 = team['hole_cards'][1]["suit"]
         if hole_cards_suit_0 == hole_cards_suit_1:
             current_val += 2
-        card_gap = abs(suite_order.index(hole_cards_rank_0) -  suite_order.index(hole_cards_rank_0))-1
+        
+        card_gap = abs(suite_order.index(hole_cards_rank_0) -  suite_order.index(hole_cards_rank_1))-1
+        #print(suite_order.index(hole_cards_rank_0))
+        #print(card_gap)
         cards_lower_than_Q = False
         if suite_order.index(hole_cards_rank_0) < 10 and suite_order.index(hole_cards_rank_1) < 10:
             cards_lower_than_Q = True
@@ -46,7 +54,7 @@ class Player:
             current_val += -3
         elif card_gap > 4:
             current_val += -4
-       
+        #print("chen value is now" + str(current_val))
         current_val = math.ceil(current_val)
         return current_val
         
@@ -58,7 +66,7 @@ class Player:
         to_call = game_state['current_buy_in'] - team['bet']
         to_raise = to_call + game_state['minimum_raise']
         
-        if chen_val > 10:
+        if chen_val >= 10:
             return to_raise
         else:
             return 0
