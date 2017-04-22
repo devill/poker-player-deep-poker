@@ -11,13 +11,21 @@ class Player:
 
         hole_cards_suit_0 = team['hole_cards'][0]["suit"]
         hole_cards_suit_1 = team['hole_cards'][1]["suit"]
+
+        active_players = 0
+        for player in game_state['players']:
+            if player['active'] != 'out':
+                active_players += 1
+
+        if active_players > 2:
+            useful_ranks = ['J','Q','K','A']
+
         if hole_cards_rank_0 == hole_cards_rank_1 and hole_cards_rank_0 in useful_ranks:
             current_bet = 10000
-        elif hole_cards_rank_0 in ['K','A'] and hole_cards_rank_1 in ['K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
+        elif active_players == 2 and hole_cards_rank_0 in ['K','A'] and hole_cards_rank_1 in ['K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
             current_bet = team['stack'] / 2
         else:
-            to_call = team['current_buy_in'] - team['bet']
-            current_bet = min(to_call, team['stack']/20)
+            current_bet = 0
         return  current_bet
         
 
