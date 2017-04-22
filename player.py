@@ -54,7 +54,8 @@ class Player:
             current_val += -3
         elif card_gap > 4:
             current_val += -4
-        #print("chen value is now" + str(current_val))
+        print(card_gap)
+        print("chen value is now" + str(current_val))
         current_val = math.ceil(current_val)
         return current_val
         
@@ -66,7 +67,7 @@ class Player:
         to_call = game_state['current_buy_in'] - team['bet']
         to_raise = to_call + game_state['minimum_raise'] + 100
         
-        if chen_val >= 8:
+        if chen_val > 8:
             return to_raise
         if chen_val >= 10:
             return to_raise + 50
