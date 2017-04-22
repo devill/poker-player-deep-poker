@@ -1,7 +1,9 @@
 
+
 import random
 import sys
 import math
+
 class Player:
     VERSION = "Fuck pogacsa"
 
@@ -81,7 +83,7 @@ class Player:
             current_bet = 10000
         elif hole_cards_rank_0 in ['J','Q','K','A'] and hole_cards_rank_1 in ['J','Q','K','A'] and hole_cards_suit_0 == hole_cards_suit_1:
             current_bet = to_call
-        elif team['bet'] > 0 and team['bet'] > to_call / 10:
+        elif team['bet'] > 0 and team['bet'] > to_call:
             current_bet = to_call
         else:
             current_bet = 0
