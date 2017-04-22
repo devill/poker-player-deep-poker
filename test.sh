@@ -44,6 +44,7 @@ curl -XPOST -d 'action=bet_request&game_state={
   "small_blind":10,
   "orbits":0,
   "dealer":0,
+  "in_action": 0,
   "community_cards":[
         {
             "rank": "6",
