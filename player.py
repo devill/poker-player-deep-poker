@@ -1,7 +1,48 @@
 
 class Player:
     VERSION = "Default Python folding player"
-
+    
+    def chen_evaluator(self,game_state):
+        current_val = 0
+        suite_value = { 'A' : 10, 'K' : 8 , 'Q' : 7 , 'J' : 6 , '10': 5 , '9' : 4.5 , '8' : 4, '7' : 3.5, '6': 3 , '5' : 2.5 , '4' :2 , '3' :1.5 , '2' : 1 }
+        suite_order = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
+        hole_cards_rank_0 = team['hole_cards'][0]["rank"]
+        hole_cards_rank_1 = team['hole_cards'][1]["rank"]
+        card_0_value = suite_value[hole_cards_rank_0]
+        card_1_value = suite_value[hole_cards_rank_1]
+        if card_0_value > card_1_value:
+            current_val += card_0_value
+        elif card_0_value < card_1_value:
+            current_val += card_1_value
+        else:
+            current_val += card_0_value * 2
+            if current_val < 5:
+                current_val = 5
+        hole_cards_suit_0 = team['hole_cards'][0]["suit"]
+        hole_cards_suit_1 = team['hole_cards'][1]["suit"]
+        if hole_cards_suit_0 == hole_cards_suit_1:
+            current_val += 2
+        card_gap = abs(suite_order.index(hole_cards_rank_0) -  suite_order.index(hole_cards_rank_0))-1
+        cards_lower_than_Q = False
+        if suite_order.index(hole_cards_rank_0) < 10 and suite_order.index(hole_cards_rank_1) < 10:
+            cards_lower_than_Q = True
+        if card_gap  < 1:
+            current_val += 0
+            if cards_lower_than_Q == True:
+                current_val += 1
+        elif card_gap < 2 :
+            current_val += -1
+            if cards_lower_than_Q == True:
+                current_val += 1
+        elif card_gap < 3:
+            current_val += -2
+        elif card_gap < 4:
+            current_val += -3
+        elif card_gap > 4:
+            current_val += -4
+       current_val = ceil(current_val)
+       return current_val
+            
 
     def get_cards_back(self,game_state):
         useful_ranks = ['8','9','10','J','Q','K','A']
