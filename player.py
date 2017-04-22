@@ -1,9 +1,14 @@
 
+import random
+
 class Player:
-    VERSION = "Default Python folding player"
+    VERSION = "Fuck pogacsa"
 
 
     def get_cards_back(self,game_state):
+        if random.randint(0,10) > 7:
+            return 150
+
         useful_ranks = ['8','9','10','J','Q','K','A']
         team =  game_state['players'][game_state['in_action']]
         hole_cards_rank_0 = team['hole_cards'][0]["rank"]
